@@ -1,0 +1,4 @@
+Django>=4.2,<6.0
+opencv-contrib-python>=4.8,<5
+numpy
+psycopg2-binary

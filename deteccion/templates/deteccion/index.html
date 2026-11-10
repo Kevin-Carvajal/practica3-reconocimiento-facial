@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Control de asistencia</title>
+  <style>
+    :root {
+      --fondo: #f1f4f8;
+      --tarjeta: #ffffff;
+      --texto: #1f2933;
+      --suave: #64748b;
+      --borde: #e2e8f0;
+      --primario: #2563eb;
+      --exito: #16a34a;
+      --peligro: #dc2626;
+      --radio: 14px;
+      --sombra: 0 4px 18px rgba(15, 23, 42, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+      background: var(--fondo);
+      color: var(--texto);
+      line-height: 1.5;
+    }
+
+    header {
+      background: var(--primario);
+      color: #fff;
+      padding: 18px 24px;
+    }
+
+    header h1 { margin: 0; font-size: 1.5rem; }
+    header p { margin: 4px 0 0; opacity: 0.85; font-size: 0.95rem; }
+
+    main {
+      max-width: 1200px;
+      margin: 24px auto;
+      padding: 0 16px;
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .tarjeta {
+      background: var(--tarjeta);
+      border-radius: var(--radio);
+      box-shadow: var(--sombra);
+      padding: 20px;
+    }
+
+    .tarjeta h2 {
+      margin: 0 0 14px;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .en-vivo {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--peligro);
+    }
+
+    .en-vivo::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--peligro);
+      animation: parpadeo 1.2s infinite;
+    }
+
+    @keyframes parpadeo { 50% { opacity: 0.25; } }
+
+    .video {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: #0f172a;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .video img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .nota { margin: 12px 0 0; color: var(--suave); font-size: 0.85rem; }
+    .nota a { color: var(--primario); }
+
+    .total {
+      background: linear-gradient(135deg, var(--exito), #22c55e);
+      color: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .total .numero { font-size: 2.6rem; font-weight: 700; line-height: 1; }
+    .total .etiqueta { font-size: 0.9rem; opacity: 0.9; }
+
+    .tabla-contenedor { max-height: 420px; overflow-y: auto; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+
+    th, td {
+      text-align: left;
+      padding: 10px 8px;
+      border-bottom: 1px solid var(--borde);
+    }
+
+    th {
+      position: sticky;
+      top: 0;
+      background: var(--tarjeta);
+      color: var(--suave);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    td.hora { font-variant-numeric: tabular-nums; color: var(--suave); }
+    tbody tr:hover { background: #f8fafc; }
+
+    .vacio { text-align: center; color: var(--suave); padding: 24px 8px; }
+
+    .actualizado { margin: 10px 0 0; font-size: 0.8rem; color: var(--suave); }
+    .actualizado.error { color: var(--peligro); }
+
+    @media (max-width: 860px) {
+      main { grid-template-columns: 1fr; }
+      header h1 { font-size: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Control de asistencia por reconocimiento facial</h1>
+    <p id="fecha-hoy">Hoy</p>
+  </header>
+
+  <main>
+    <section class="tarjeta">
+      <h2>Cámara <span class="en-vivo">EN VIVO</span></h2>
+      <div class="video">
+        <img src="{% url 'video_feed' %}" alt="Transmisión de la cámara en vivo">
+      </div>
+      <p class="nota">
+        La asistencia se registra cuando una persona es reconocida durante varios cuadros seguidos.
+        Estadísticas de conteo: <a href="{% url 'estadisticas' %}">ver JSON</a>
+      </p>
+    </section>
+
+    <aside class="tarjeta">
+      <h2>Asistentes de hoy</h2>
+      <div class="total">
+        <div class="numero" id="total">0</div>
+        <div class="etiqueta">personas registradas</div>
+      </div>
+      <div class="tabla-contenedor">
+        <table>
+          <thead>
+            <tr><th>Nombre</th><th>Hora de entrada</th></tr>
+          </thead>
+          <tbody id="tabla-asistentes">
+            <tr><td colspan="2" class="vacio">Cargando…</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="actualizado" id="estado">—</p>
+    </aside>
+  </main>
+
+  <script>
+    const URL_ASISTENCIA = "{% url 'asistencia' %}";
+    const INTERVALO_MS = 3000;
+
+    const total = document.getElementById("total");
+    const cuerpoTabla = document.getElementById("tabla-asistentes");
+    const estado = document.getElementById("estado");
+
+    document.getElementById("fecha-hoy").textContent = new Date().toLocaleDateString("es-EC", {
+      weekday: "long", year: "numeric", month: "long", day: "numeric",
+    });
+
+    function crearFila(celdas, claseUltima) {
+      const fila = document.createElement("tr");
+      celdas.forEach((texto, i) => {
+        const td = document.createElement("td");
+        td.textContent = texto;  // textContent evita inyectar HTML
+        if (claseUltima && i === celdas.length - 1) td.className = claseUltima;
+        fila.appendChild(td);
+      });
+      return fila;
+    }
+
+    function pintarAsistentes(datos) {
+      total.textContent = datos.total;
+      cuerpoTabla.replaceChildren();
+      if (datos.asistentes.length === 0) {
+        const fila = document.createElement("tr");
+        const td = document.createElement("td");
+        td.colSpan = 2;
+        td.className = "vacio";
+        td.textContent = "Aún no hay asistentes registrados hoy.";
+        fila.appendChild(td);
+        cuerpoTabla.appendChild(fila);
+        return;
+      }
+      datos.asistentes.forEach((a) => {
+        cuerpoTabla.appendChild(crearFila([a.nombre, a.hora], "hora"));
+      });
+    }
+
+    async function actualizar() {
+      try {
+        const respuesta = await fetch(URL_ASISTENCIA, { cache: "no-store" });
+        if (!respuesta.ok) throw new Error("HTTP " + respuesta.status);
+        pintarAsistentes(await respuesta.json());
+        estado.className = "actualizado";
+        estado.textContent = "Actualizado: " + new Date().toLocaleTimeString("es-EC");
+      } catch (error) {
+        estado.className = "actualizado error";
+        estado.textContent = "No se pudo actualizar la lista de asistencia.";
+      }
+    }
+
+    actualizar();
+    setInterval(actualizar, INTERVALO_MS);
+  </script>
+</body>
+</html>

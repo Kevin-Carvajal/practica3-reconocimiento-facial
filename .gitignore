@@ -1,0 +1,9 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+.env
+db.sqlite3
+rostros_entrenamiento/
+modelo_lbph.yml
+etiquetas.json
