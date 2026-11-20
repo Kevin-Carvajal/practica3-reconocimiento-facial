@@ -51,6 +51,27 @@ Ejemplo de respuesta de `/asistencia/`:
 {"fecha": "2026-11-10", "total": 1, "asistentes": [{"nombre": "Ana Pérez", "hora": "08:02:15"}]}
 ```
 
+## Pruebas (Práctica 4)
+Las pruebas están en `deteccion/tests/` y usan SQLite en memoria (`config/settings_test.py`),
+así que no necesitan PostgreSQL ni cámara.
+
+| Archivo | Tipo | Qué valida |
+|---------|------|------------|
+| `test_unitarias.py` | Unitarias | `ControlAsistencia`, entrenamiento y predicción LBPH, captura de muestras, `DetectorRostros`, `VideoCamera` y modelos |
+| `test_integracion.py` | Integración | Rutas de Django, plantilla, APIs `/asistencia/` y `/estadisticas/`, transmisión `/video_feed/` con la base de datos |
+| `test_funcionales.py` | Funcionales | CU-01 Inicio, CU-02 Detección en video, CU-03 Visualización en la interfaz |
+| `utilidades.py` | Apoyo | Cámara simulada, rostros sintéticos y carpetas temporales |
+
+Ejecutar solo las pruebas:
+```bash
+python manage.py test --settings=config.settings_test -v 2
+```
+
+Ejecutar las pruebas y generar las evidencias (log y cobertura) en `reportes/`:
+```bash
+python ejecutar_pruebas.py
+```
+
 ## Estructura
 - `deteccion/camera.py`: captura de video, detección y reconocimiento (`DetectorRostros`, `VideoCamera`)
 - `deteccion/reconocimiento.py`: captura de muestras, entrenamiento y predicción LBPH
@@ -59,3 +80,6 @@ Ejemplo de respuesta de `/asistencia/`:
 - `deteccion/views.py`: vistas, transmisión MJPEG, estadísticas y asistencia
 - `deteccion/templates/deteccion/index.html`: interfaz web
 - `entrenar_rostros.py`: herramienta de línea de comandos para capturar y entrenar
+- `deteccion/tests/`: pruebas unitarias, de integración y funcionales
+- `config/settings_test.py`: configuración de pruebas (SQLite en memoria)
+- `ejecutar_pruebas.py`: ejecuta las pruebas y guarda log y cobertura en `reportes/`

@@ -1,0 +1,81 @@
+Fecha de ejecución: 2026-11-19 20:51:26
+======================================================================
+Found 47 test(s).
+Operations to perform:
+  Synchronize unmigrated apps: staticfiles
+  Apply all migrations: auth, contenttypes, deteccion
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0001_initial... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying deteccion.0001_initial... OK
+  Applying deteccion.0002_asistencia... OK
+System check identified no issues (0 silenced).
+Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+test_al_iniciar_el_dia_no_hay_asistentes (deteccion.tests.test_funcionales.CU01InicioTests.test_al_iniciar_el_dia_no_hay_asistentes) ... ok
+test_la_pagina_principal_carga_con_sus_secciones (deteccion.tests.test_funcionales.CU01InicioTests.test_la_pagina_principal_carga_con_sus_secciones) ... ok
+test_aparicion_breve_no_registra_asistencia (deteccion.tests.test_funcionales.CU02DeteccionEnVideoTests.test_aparicion_breve_no_registra_asistencia) ... ok
+test_persona_no_registrada_no_genera_asistencia (deteccion.tests.test_funcionales.CU02DeteccionEnVideoTests.test_persona_no_registrada_no_genera_asistencia) ... ok
+test_persona_reconocida_queda_registrada (deteccion.tests.test_funcionales.CU02DeteccionEnVideoTests.test_persona_reconocida_queda_registrada) ... ok
+test_el_panel_muestra_a_quien_paso_por_la_camara (deteccion.tests.test_funcionales.CU03VisualizacionTests.test_el_panel_muestra_a_quien_paso_por_la_camara) ... ok
+test_una_persona_aparece_una_sola_vez_en_el_panel (deteccion.tests.test_funcionales.CU03VisualizacionTests.test_una_persona_aparece_una_sola_vez_en_el_panel) ... ok
+test_hora_en_formato_local (deteccion.tests.test_integracion.AsistenciaApiTests.test_hora_en_formato_local) ... ok
+test_sin_asistentes (deteccion.tests.test_integracion.AsistenciaApiTests.test_sin_asistentes) ... ok
+test_solo_devuelve_los_asistentes_de_hoy (deteccion.tests.test_integracion.AsistenciaApiTests.test_solo_devuelve_los_asistentes_de_hoy) ... ok
+test_devuelve_maximo_10_registros_del_mas_reciente_al_mas_antiguo (deteccion.tests.test_integracion.EstadisticasApiTests.test_devuelve_maximo_10_registros_del_mas_reciente_al_mas_antiguo) ... ok
+test_index_enlaza_el_video_y_la_api_de_asistencia (deteccion.tests.test_integracion.IndexTests.test_index_enlaza_el_video_y_la_api_de_asistencia) ... ok
+test_index_responde_y_usa_la_plantilla (deteccion.tests.test_integracion.IndexTests.test_index_responde_y_usa_la_plantilla) ... ok
+test_cada_ruta_apunta_a_su_vista (deteccion.tests.test_integracion.RutasTests.test_cada_ruta_apunta_a_su_vista) ... ok
+test_nombres_de_rutas (deteccion.tests.test_integracion.RutasTests.test_nombres_de_rutas) ... ok
+test_ruta_inexistente_devuelve_404 (deteccion.tests.test_integracion.RutasTests.test_ruta_inexistente_devuelve_404) ... ok
+test_el_stream_registra_la_asistencia (deteccion.tests.test_integracion.VideoFeedTests.test_el_stream_registra_la_asistencia) ... ok
+test_el_stream_termina_si_falla_la_camara (deteccion.tests.test_integracion.VideoFeedTests.test_el_stream_termina_si_falla_la_camara) ... ok
+test_guarda_el_conteo_cada_30_frames (deteccion.tests.test_integracion.VideoFeedTests.test_guarda_el_conteo_cada_30_frames) ... ok
+test_tipo_de_contenido_mjpeg (deteccion.tests.test_integracion.VideoFeedTests.test_tipo_de_contenido_mjpeg) ... ok
+test_al_cambiar_el_dia_se_puede_registrar_de_nuevo (deteccion.tests.test_unitarias.ControlAsistenciaTests.test_al_cambiar_el_dia_se_puede_registrar_de_nuevo) ... ok
+test_carga_los_registrados_previos_de_la_base (deteccion.tests.test_unitarias.ControlAsistenciaTests.test_carga_los_registrados_previos_de_la_base) ... ok
+test_ignora_desconocido_y_sin_modelo (deteccion.tests.test_unitarias.ControlAsistenciaTests.test_ignora_desconocido_y_sin_modelo) ... ok
+test_la_racha_se_reinicia_si_la_persona_desaparece (deteccion.tests.test_unitarias.ControlAsistenciaTests.test_la_racha_se_reinicia_si_la_persona_desaparece) ... ok
+test_no_registra_antes_de_los_frames_requeridos (deteccion.tests.test_unitarias.ControlAsistenciaTests.test_no_registra_antes_de_los_frames_requeridos) ... ok
+test_registra_al_completar_los_frames_consecutivos (deteccion.tests.test_unitarias.ControlAsistenciaTests.test_registra_al_completar_los_frames_consecutivos) ... ok
+test_registra_una_sola_vez_por_dia (deteccion.tests.test_unitarias.ControlAsistenciaTests.test_registra_una_sola_vez_por_dia) ... ok
+test_varias_personas_en_el_mismo_frame (deteccion.tests.test_unitarias.ControlAsistenciaTests.test_varias_personas_en_el_mismo_frame) ... ok
+test_asistencia_unica_por_persona_y_dia (deteccion.tests.test_unitarias.ModelosTests.test_asistencia_unica_por_persona_y_dia) ... ok
+test_misma_persona_en_dias_distintos (deteccion.tests.test_unitarias.ModelosTests.test_misma_persona_en_dias_distintos) ... ok
+test_str_de_los_modelos (deteccion.tests.test_unitarias.ModelosTests.test_str_de_los_modelos) ... ok
+test_error_de_camara_lanza_excepcion_y_libera_la_camara (deteccion.tests.test_unitarias.CapturarMuestrasTests.test_error_de_camara_lanza_excepcion_y_libera_la_camara) ... ok
+test_solo_guarda_frames_con_un_unico_rostro (deteccion.tests.test_unitarias.CapturarMuestrasTests.test_solo_guarda_frames_con_un_unico_rostro) ... ok
+test_carga_el_clasificador_haar (deteccion.tests.test_unitarias.DetectorRostrosTests.test_carga_el_clasificador_haar) ... ok
+test_dibujar_marca_el_recuadro_del_rostro (deteccion.tests.test_unitarias.DetectorRostrosTests.test_dibujar_marca_el_recuadro_del_rostro) ... ok
+test_identificar_conserva_el_orden_de_los_rostros (deteccion.tests.test_unitarias.DetectorRostrosTests.test_identificar_conserva_el_orden_de_los_rostros) ... ok
+test_imagen_sin_rostros_devuelve_lista_vacia (deteccion.tests.test_unitarias.DetectorRostrosTests.test_imagen_sin_rostros_devuelve_lista_vacia) ... ok
+test_entrenar_genera_modelo_y_etiquetas (deteccion.tests.test_unitarias.ReconocimientoTests.test_entrenar_genera_modelo_y_etiquetas) ... ok
+test_entrenar_sin_fotos_lanza_error (deteccion.tests.test_unitarias.ReconocimientoTests.test_entrenar_sin_fotos_lanza_error) ... ok
+test_predice_el_nombre_correcto (deteccion.tests.test_unitarias.ReconocimientoTests.test_predice_el_nombre_correcto) ... ok
+test_rostro_no_entrenado_es_desconocido (deteccion.tests.test_unitarias.ReconocimientoTests.test_rostro_no_entrenado_es_desconocido) ... ok
+test_sin_modelo_devuelve_sin_modelo (deteccion.tests.test_unitarias.ReconocimientoTests.test_sin_modelo_devuelve_sin_modelo) ... ok
+test_sobre_el_umbral_devuelve_desconocido (deteccion.tests.test_unitarias.ReconocimientoTests.test_sobre_el_umbral_devuelve_desconocido) ... ok
+test_detecta_e_identifica_en_cada_frame (deteccion.tests.test_unitarias.VideoCameraTests.test_detecta_e_identifica_en_cada_frame) ... ok
+test_falla_de_codificacion_devuelve_none (deteccion.tests.test_unitarias.VideoCameraTests.test_falla_de_codificacion_devuelve_none) ... ok
+test_falla_de_lectura_devuelve_none (deteccion.tests.test_unitarias.VideoCameraTests.test_falla_de_lectura_devuelve_none) ... ok
+test_frame_valido_devuelve_jpeg (deteccion.tests.test_unitarias.VideoCameraTests.test_frame_valido_devuelve_jpeg) ... ok
+
+----------------------------------------------------------------------
+Ran 47 tests in 0.648s
+
+OK
+Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...

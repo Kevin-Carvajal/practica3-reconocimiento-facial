@@ -7,3 +7,7 @@ db.sqlite3
 rostros_entrenamiento/
 modelo_lbph.yml
 etiquetas.json
+
+# Pruebas
+.coverage
+reportes/cobertura_html/
