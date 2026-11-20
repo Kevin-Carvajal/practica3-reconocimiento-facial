@@ -1,12 +1,12 @@
 Name                          Stmts   Miss  Cover   Missing
 -----------------------------------------------------------
-deteccion/__init__.py             0      0   100%
-deteccion/apps.py                 4      0   100%
-deteccion/asistencia.py          38      0   100%
-deteccion/camera.py              38      0   100%
-deteccion/models.py              17      0   100%
-deteccion/reconocimiento.py      68      0   100%
-deteccion/urls.py                 3      0   100%
-deteccion/views.py               32      0   100%
+deteccion\__init__.py             0      0   100%
+deteccion\apps.py                 4      0   100%
+deteccion\asistencia.py          38      0   100%
+deteccion\camera.py              38      0   100%
+deteccion\models.py              17      0   100%
+deteccion\reconocimiento.py      68      0   100%
+deteccion\urls.py                 3      0   100%
+deteccion\views.py               32      0   100%
 -----------------------------------------------------------
 TOTAL                           200      0   100%

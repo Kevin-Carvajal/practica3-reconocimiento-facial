@@ -1,4 +1,4 @@
-Fecha de ejecución: 2026-11-19 20:51:26
+Fecha de ejecución: 2026-11-20 11:36:01
 ======================================================================
 Found 47 test(s).
 Operations to perform:
@@ -26,6 +26,7 @@ Running migrations:
   Applying deteccion.0002_asistencia... OK
 System check identified no issues (0 silenced).
 Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+
 test_al_iniciar_el_dia_no_hay_asistentes (deteccion.tests.test_funcionales.CU01InicioTests.test_al_iniciar_el_dia_no_hay_asistentes) ... ok
 test_la_pagina_principal_carga_con_sus_secciones (deteccion.tests.test_funcionales.CU01InicioTests.test_la_pagina_principal_carga_con_sus_secciones) ... ok
 test_aparicion_breve_no_registra_asistencia (deteccion.tests.test_funcionales.CU02DeteccionEnVideoTests.test_aparicion_breve_no_registra_asistencia) ... ok
@@ -75,7 +76,8 @@ test_falla_de_lectura_devuelve_none (deteccion.tests.test_unitarias.VideoCameraT
 test_frame_valido_devuelve_jpeg (deteccion.tests.test_unitarias.VideoCameraTests.test_frame_valido_devuelve_jpeg) ... ok
 
 ----------------------------------------------------------------------
-Ran 47 tests in 0.648s
+Ran 47 tests in 2.127s
 
 OK
 Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+

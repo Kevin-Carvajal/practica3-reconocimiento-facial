@@ -19,7 +19,7 @@ ARCHIVO_ETIQUETAS = BASE_DIR / "etiquetas.json"
 
 TAMANO = (200, 200)
 # En LBPH, un valor menor significa más parecido. Por encima de este umbral se considera desconocido.
-UMBRAL_CONFIANZA = 80.0
+UMBRAL_CONFIANZA = 60.0
 
 
 class ReconocedorRostros:
